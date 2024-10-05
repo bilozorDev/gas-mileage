@@ -12,7 +12,7 @@ import GetFullCarInfo from "./GetFullCarInfo";
 import DisabledSelector from "./DisabledSelector";
 
 export default function ComparisonTable() {
-  const { carsForComparison, setCarsForComparison } = useSelectedCar();
+  const { carsForComparison } = useSelectedCar();
   const [selectedIndex, setSelectedIndex] = useState(0);
   console.log("carsForComparison", carsForComparison);
   const [isOpen, setIsOpen] = useState(false);

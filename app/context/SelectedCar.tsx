@@ -14,8 +14,8 @@ type SelectedCarContextType = {
   handleMakeChange: (make: string) => void;
   handleModelChange: (model: string) => void;
   handleOptionChange: (option: string) => void;
-  carsForComparison: any;
-  setCarsForComparison: React.Dispatch<React.SetStateAction<any>>;
+  carsForComparison: unknown[];
+  setCarsForComparison: React.Dispatch<React.SetStateAction<unknown>>;
 };
 
 const SelectedCarContext = React.createContext<SelectedCarContextType | null>(
@@ -76,6 +76,8 @@ export const SelectedCarProvider: React.FC<SelectedCarProviderProps> = ({
 
 export const useSelectedCar = () => {
   const context = useContext(SelectedCarContext);
-  
+  if (!context) {
+    throw new Error("useSelectedCar must be used within a SelectedCarProvider");
+  }
   return context;
 };
