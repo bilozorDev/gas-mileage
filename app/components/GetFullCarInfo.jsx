@@ -29,7 +29,7 @@ const GetFullCarInfo = ({ id, index }) => {
     return <div>Loading...</div>;
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async () => {
     const updatedCars = [...carsForComparison];
     updatedCars[index] = {
       ...data,

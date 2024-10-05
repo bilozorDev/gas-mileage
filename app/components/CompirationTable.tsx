@@ -1,15 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import {
-  Dialog,
-  DialogBackdrop,
-  DialogPanel,
-  DialogTitle,
-  Description,
-} from "@headlessui/react";
+import { useState } from "react";
+import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import { AnimatePresence, motion } from "framer-motion";
-import { CheckIcon } from "@heroicons/react/24/outline";
 import GetCarYear from "./GetCarYear";
 import { useSelectedCar } from "../context/SelectedCar";
 import GetCarMake from "./GetCarMake";
@@ -17,7 +10,6 @@ import GetCarModel from "./GetCarModel";
 import GetCarOptions from "./GetCarOptions";
 import GetFullCarInfo from "./GetFullCarInfo";
 import DisabledSelector from "./DisabledSelector";
-import { symbol } from "framer-motion/client";
 
 export default function ComparisonTable() {
   const { carsForComparison, setCarsForComparison } = useSelectedCar();

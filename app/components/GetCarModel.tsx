@@ -5,7 +5,7 @@ import DisabledSelector from "./DisabledSelector";
 
 const GetCarModel = () => {
   const [carModels, setCarModels] = useState([]);
-  const { selectedCar, setSelectedCar } = useSelectedCar();
+  const { selectedCar } = useSelectedCar();
   useEffect(() => {
     if (!selectedCar.make || !selectedCar.year) {
       return;

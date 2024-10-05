@@ -1,6 +1,3 @@
-"use client";
-
-import { useState } from "react";
 import {
   Label,
   Listbox,
@@ -33,7 +30,7 @@ export default function DisabledSelector({
             {" "}
             {waiting ? (
               <div className="inline-flex  space-x-2 justify-center">
-               <span className="-mt-0.5"> {placeholder}</span>
+                <span className="-mt-0.5"> {placeholder}</span>
                 <svg
                   className="animate-spin -ml-1 mr-3 h-5 w-5 text-gray-400"
                   xmlns="http://www.w3.org/2000/svg"
@@ -54,7 +51,6 @@ export default function DisabledSelector({
                     d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                   ></path>
                 </svg>
-                
               </div>
             ) : (
               placeholder

@@ -76,8 +76,6 @@ export const SelectedCarProvider: React.FC<SelectedCarProviderProps> = ({
 
 export const useSelectedCar = () => {
   const context = useContext(SelectedCarContext);
-  if (!context) {
-    throw new Error("useSelectedCar must be used within a SelectedCarProvider");
-  }
+  
   return context;
 };
