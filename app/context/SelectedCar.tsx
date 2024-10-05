@@ -14,8 +14,8 @@ type SelectedCarContextType = {
   handleMakeChange: (make: string) => void;
   handleModelChange: (model: string) => void;
   handleOptionChange: (option: string) => void;
-  carsForComparison: unknown[];
-  setCarsForComparison: React.Dispatch<React.SetStateAction<unknown>>;
+  carsForComparison: any;
+  setCarsForComparison: React.Dispatch<React.SetStateAction<any>>;
 };
 
 const SelectedCarContext = React.createContext<SelectedCarContextType | null>(
