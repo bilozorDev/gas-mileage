@@ -13,7 +13,7 @@ import DisabledSelector from "./DisabledSelector";
 import { useAddCarModal } from "../context/AddCarModalContext";
 
 export default function ComparisonTable() {
-  const { carsForComparison } = useSelectedCar();
+  const { carsForComparison, setCarsForComparison } = useSelectedCar();
   const [selectedIndex, setSelectedIndex] = useState(0);
   const { addCarModalOpen, setAddCarModalOpen } = useAddCarModal();
   const [isOpen, setIsOpen] = useState(false);
@@ -57,6 +57,12 @@ export default function ComparisonTable() {
     },
   ];
 
+  const handleDeleteCar = (i: number) => {
+    const updatedCars = [...carsForComparison];
+    updatedCars[i] = {};
+    setCarsForComparison(updatedCars);
+  };
+
   const handleAddCar = (i: number) => {
     setSelectedIndex(i);
     setAddCarModalOpen(true);
@@ -90,14 +96,15 @@ export default function ComparisonTable() {
               {carsForComparison.map((car, i) => {
                 console.log("car", car);
                 return Object.keys(car).length != 0 ? (
-                  <th
-                    key={i}
-                    scope="col"
-                    className="p-0 text-center underline"
-                  >
-                    <div className="text-md font-semibold text-gray-800">
-                      {car?.year} {car?.make}
-                      <p>{car?.model}</p>
+                  <th key={i} scope="col" className="p-0 text-center ">
+                    <div className="text-md font-semibold text-cyan-700 relative">
+                      {car?.year} {car?.make} {car?.model}
+                      <div
+                        className="absolute -top-5 right-0 text-red-600 font-light cursor-pointer"
+                        onClick={() => handleDeleteCar(i)}
+                      >
+                        x
+                      </div>
                       <span className="sr-only">car</span>
                     </div>
                   </th>
