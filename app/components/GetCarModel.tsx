@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelectedCar } from "../context/SelectedCar";
 import OptionsSelector from "./OptionsSelector";
+import DisabledSelector from "./DisabledSelector";
 
 const GetCarModel = () => {
   const [carModels, setCarModels] = useState([]);
@@ -21,7 +22,7 @@ const GetCarModel = () => {
       });
   }, [selectedCar]);
   if (carModels.length === 0) {
-    return <p>Loading car models...</p>;
+    return <DisabledSelector placeholder="Loading car models..." title="model" waiting={true}/>;
   }
   return <OptionsSelector options={carModels} params="model" />;
 };

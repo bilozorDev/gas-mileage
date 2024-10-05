@@ -2,6 +2,7 @@
 import { Suspense, useEffect, useState } from "react";
 import OptionsSelector from "./OptionsSelector";
 import { useSelectedCar } from "../context/SelectedCar";
+import DisabledSelector from "./DisabledSelector";
 
 const GetCarYear = () => {
   const [availableYears, setAvailableYears] = useState([]);
@@ -17,7 +18,7 @@ const GetCarYear = () => {
   }, []);
 
   if (availableYears.length === 0) {
-    return <p>Loading car years...</p>;
+    return <DisabledSelector placeholder="Loading list of years..." title="year" waiting={true}/>;
   }
 
   return <OptionsSelector options={availableYears} params="year" />;

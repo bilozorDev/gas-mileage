@@ -14,6 +14,8 @@ type SelectedCarContextType = {
   handleMakeChange: (make: string) => void;
   handleModelChange: (model: string) => void;
   handleOptionChange: (option: string) => void;
+  carsForComparison: any;
+  setCarsForComparison: React.Dispatch<React.SetStateAction<any>>;
 };
 
 const SelectedCarContext = React.createContext<SelectedCarContextType | null>(
@@ -33,6 +35,7 @@ export const SelectedCarProvider: React.FC<SelectedCarProviderProps> = ({
     year: "",
     id: "",
   });
+  const [carsForComparison, setCarsForComparison] = useState([{}, {}, {}]);
 
   const handleYearChange = (year: string) => {
     setSelectedCar((prev) => ({
@@ -62,6 +65,8 @@ export const SelectedCarProvider: React.FC<SelectedCarProviderProps> = ({
         handleMakeChange,
         handleModelChange,
         handleOptionChange,
+        carsForComparison,
+        setCarsForComparison,
       }}
     >
       {children}

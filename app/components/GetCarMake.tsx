@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import OptionsSelector from "./OptionsSelector";
 import { useSelectedCar } from "../context/SelectedCar";
+import DisabledSelector from "./DisabledSelector";
 
 const GetCarMake = () => {
     const {selectedCar, setSelectedCar} = useSelectedCar();
@@ -19,7 +20,7 @@ const GetCarMake = () => {
         });
     }, [selectedCar]);
     if (availableMakes.length === 0) {
-      return <p>Loading car makes...</p>;
+      return <DisabledSelector placeholder="Loading car makes..." title="make" waiting={true} />;
     }
   return <OptionsSelector options={availableMakes} params="make" />;
 };

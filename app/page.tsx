@@ -5,20 +5,15 @@ import { useSelectedCar } from "./context/SelectedCar";
 import GetCarModel from "./components/GetCarModel";
 import GetCarOptions from "./components/GetCarOptions";
 import GetFullCarInfo from "./components/GetFullCarInfo";
+import CompirationTable from "./components/CompirationTable";
 export default function Home() {
   const { selectedCar } = useSelectedCar();
 
   return (
-    <div className="w-60">
+    <div >
       {/* Server Component for fetching and displaying car year */}
-
-      <GetCarYear />
-
-      {selectedCar.year ? <GetCarMake /> : null}
-      {selectedCar.make ? <GetCarModel /> : null}
-      {selectedCar.model ? <GetCarOptions /> : null}
-
-      {selectedCar.id ? <GetFullCarInfo id={selectedCar.id} /> : null}
+      <CompirationTable />
+      
     </div>
   );
 }
