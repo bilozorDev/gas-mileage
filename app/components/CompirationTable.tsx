@@ -15,8 +15,8 @@ import { useAddCarModal } from "../context/AddCarModalContext";
 export default function ComparisonTable() {
   const { carsForComparison, setCarsForComparison } = useSelectedCar();
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const { addCarModalOpen, setAddCarModalOpen } = useAddCarModal();
-  const [isOpen, setIsOpen] = useState(false);
+  const { setAddCarModalOpen } = useAddCarModal();
+
   // Simulate data fetching from an API
 
   const sections = [
