@@ -69,7 +69,7 @@ const OptionsSelector: React.FC<SelectorOptions & { params: string }> = ({
     }
   };
   if (options.length === 0) {
-    return <DisabledSelector placeholder="Loading..."/>;
+    return <DisabledSelector placeholder="Loading..." />;
   }
   // Ensure options is always an array (even if a single object is returned)
   const normalizedOptions = Array.isArray(options) ? options : [options];

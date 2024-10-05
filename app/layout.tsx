@@ -2,6 +2,7 @@
 
 import "./globals.css";
 import { SelectedCarProvider } from "./context/SelectedCar";
+import { AddCarModalProvider } from "./context/AddCarModalContext";
 
 export default function RootLayout({
   children,
@@ -11,7 +12,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <SelectedCarProvider>{children}</SelectedCarProvider>
+        <SelectedCarProvider>
+          <AddCarModalProvider>{children}</AddCarModalProvider>
+        </SelectedCarProvider>
       </body>
     </html>
   );

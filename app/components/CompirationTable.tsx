@@ -10,11 +10,12 @@ import GetCarModel from "./GetCarModel";
 import GetCarOptions from "./GetCarOptions";
 import GetFullCarInfo from "./GetFullCarInfo";
 import DisabledSelector from "./DisabledSelector";
+import { useAddCarModal } from "../context/AddCarModalContext";
 
 export default function ComparisonTable() {
   const { carsForComparison } = useSelectedCar();
   const [selectedIndex, setSelectedIndex] = useState(0);
-  console.log("carsForComparison", carsForComparison);
+  const { addCarModalOpen, setAddCarModalOpen } = useAddCarModal();
   const [isOpen, setIsOpen] = useState(false);
   // Simulate data fetching from an API
 
@@ -58,7 +59,7 @@ export default function ComparisonTable() {
 
   const handleAddCar = (i: number) => {
     setSelectedIndex(i);
-    setIsOpen(true);
+    setAddCarModalOpen(true);
   };
 
   return (
@@ -89,16 +90,25 @@ export default function ComparisonTable() {
               {carsForComparison.map((car, i) => {
                 console.log("car", car);
                 return Object.keys(car).length != 0 ? (
-                  <th key={car.name} scope="col" className="p-0">
-                    <div className="text-sm/5 font-semibold text-indigo-600">
+                  <th
+                    key={i}
+                    scope="col"
+                    className="p-0 text-center underline"
+                  >
+                    <div className="text-md font-semibold text-gray-800">
                       {car?.year} {car?.make}
                       <p>{car?.model}</p>
                       <span className="sr-only">car</span>
                     </div>
                   </th>
                 ) : (
-                  <th key={car.name} scope="col" className="p-0">
-                    <button onClick={() => handleAddCar(i)}>Select Car </button>
+                  <th key={i} scope="col" className="p-0 text-center">
+                    <button
+                      className="rounded-md bg-indigo-50 px-3.5 py-2.5 text-sm font-semibold text-indigo-600 shadow-sm hover:bg-indigo-100"
+                      onClick={() => handleAddCar(i)}
+                    >
+                      Select Car{" "}
+                    </button>
                   </th>
                 );
               })}
@@ -138,17 +148,16 @@ export default function ComparisonTable() {
                           <span className="text-sm/6 text-gray-950">-</span>
                         </td>
                       ))
-                    : carsForComparison.map((car) => {
-                        console.log("car", car);
+                    : carsForComparison.map((car, i) => {
                         return (
-                          <td key={car.name} className="p-4">
+                          <td key={i} className="p-4 text-center">
                             <span className="text-sm/6 text-gray-950">
                               {car[feature.key] ? (
                                 <>
                                   {car[feature.key]} {feature.symbol || ""}
                                 </>
                               ) : (
-                                "N/A"
+                                "-"
                               )}
                             </span>
                           </td>
@@ -160,28 +169,27 @@ export default function ComparisonTable() {
           ))}
         </table>
       </div>
-      <Modal isOpen={isOpen} setIsOpen={setIsOpen} index={selectedIndex} />
+      <Modal index={selectedIndex} />
     </div>
   );
 }
 
 interface ModalProps {
-  isOpen: boolean;
-  setIsOpen: (isOpen: boolean) => void;
   index: number;
 }
 
-const Modal = ({ isOpen, setIsOpen, index }: ModalProps) => {
+const Modal = ({ index }: ModalProps) => {
   const { selectedCar } = useSelectedCar();
+  const { addCarModalOpen, setAddCarModalOpen } = useAddCarModal();
   console.log("index", index);
   return (
     <>
       <AnimatePresence>
-        {isOpen && (
+        {addCarModalOpen && (
           <Dialog
             static
-            open={isOpen}
-            onClose={() => setIsOpen(false)}
+            open={addCarModalOpen}
+            onClose={() => setAddCarModalOpen(false)}
             className="relative z-50"
           >
             <motion.div
@@ -226,13 +234,15 @@ const Modal = ({ isOpen, setIsOpen, index }: ModalProps) => {
                 {selectedCar.id ? (
                   <GetFullCarInfo id={selectedCar.id} index={index} />
                 ) : (
-                  <button
-                    type="button"
-                    disabled
-                    className="rounded-md mx-auto bg-indigo-50 px-3.5 py-2.5 text-sm font-semibold text-indigo-600 shadow-sm hover:bg-indigo-100"
-                  >
-                    Add car
-                  </button>
+                  <div className="pt-4 flex">
+                    <button
+                      type="button"
+                      disabled
+                      className="rounded-md w-full  bg-indigo-50 px-3.5 py-2.5 text-sm font-semibold text-indigo-600 shadow-sm hover:bg-indigo-100"
+                    >
+                      Add car
+                    </button>
+                  </div>
                 )}
               </DialogPanel>
             </div>
